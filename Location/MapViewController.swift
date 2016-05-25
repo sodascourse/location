@@ -41,14 +41,27 @@ class MapViewController: UIViewController {
 
     // MARK: View Lifecycle
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        self.mapView.showsCompass = true
+        self.mapView.showsScale = true
+
+        self.toolbarItems = [MKUserTrackingBarButtonItem(mapView: self.mapView)]
+    }
+
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+
+        // Show the toolbar of the navigation controller
+        self.navigationController?.setToolbarHidden(false, animated: true)
+        self.navigationController?.hidesBarsOnTap = true
 
         // Ask user to grant permission first.
         LocationManager.sharedInstance.requestUserAuthorization { granted in
             if granted {
                 self.mapView.showsUserLocation = true
-                self.mapView.userTrackingMode = .Follow
+                self.mapView.setUserTrackingMode(.Follow, animated: true)
             } else {
                 let message = "Open the Preferences to enable the location service and " +
                     "grant location permission for this app"
@@ -58,6 +71,14 @@ class MapViewController: UIViewController {
                 self.presentViewController(alertController, animated: true, completion: nil)
             }
         }
+    }
+
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        // Hide the toolbar of the navigation controller
+        self.navigationController?.setToolbarHidden(true, animated: true)
+        self.navigationController?.hidesBarsOnTap = false
     }
 }
 

@@ -68,6 +68,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FEB5241B1CF527EF003D7191 /* Build configuration list for PBXNativeTarget "Location" */;
 			buildPhases = (
+				FEB5CB9A1CF52B82000D73CB /* Swiftlint */,
 				FEB524051CF527EF003D7191 /* Sources */,
 				FEB524061CF527EF003D7191 /* Frameworks */,
 				FEB524071CF527EF003D7191 /* Resources */,
@@ -126,6 +127,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		FEB5CB9A1CF52B82000D73CB /* Swiftlint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = Swiftlint;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "which swiftlint > /dev/null && swiftlint";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		FEB524051CF527EF003D7191 /* Sources */ = {

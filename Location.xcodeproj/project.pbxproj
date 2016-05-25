@@ -11,6 +11,10 @@
 		FEB524121CF527EF003D7191 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FEB524101CF527EF003D7191 /* Main.storyboard */; };
 		FEB524141CF527EF003D7191 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FEB524131CF527EF003D7191 /* Assets.xcassets */; };
 		FEB524171CF527EF003D7191 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FEB524151CF527EF003D7191 /* LaunchScreen.storyboard */; };
+		FEB5CB961CF52A58000D73CB /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FEB5CB941CF52A4B000D73CB /* MapKit.framework */; };
+		FEB5CB971CF52A7A000D73CB /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FEB5CB911CF52A01000D73CB /* CoreLocation.framework */; };
+		FEB5CB991CF52A9D000D73CB /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEB5CB981CF52A9D000D73CB /* MapViewController.swift */; };
+		FEB5CB9C1CF53018000D73CB /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEB5CB9B1CF53018000D73CB /* LocationManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +24,10 @@
 		FEB524131CF527EF003D7191 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FEB524161CF527EF003D7191 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FEB524181CF527EF003D7191 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FEB5CB911CF52A01000D73CB /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		FEB5CB941CF52A4B000D73CB /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		FEB5CB981CF52A9D000D73CB /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		FEB5CB9B1CF53018000D73CB /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -27,6 +35,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FEB5CB971CF52A7A000D73CB /* CoreLocation.framework in Frameworks */,
+				FEB5CB961CF52A58000D73CB /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -37,6 +47,7 @@
 			isa = PBXGroup;
 			children = (
 				FEB5240B1CF527EF003D7191 /* Location */,
+				FEB5CB931CF52A37000D73CB /* Frameworks */,
 				FEB5240A1CF527EF003D7191 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -53,12 +64,23 @@
 			isa = PBXGroup;
 			children = (
 				FEB5240C1CF527EF003D7191 /* AppDelegate.swift */,
+				FEB5CB981CF52A9D000D73CB /* MapViewController.swift */,
+				FEB5CB9B1CF53018000D73CB /* LocationManager.swift */,
 				FEB524101CF527EF003D7191 /* Main.storyboard */,
 				FEB524131CF527EF003D7191 /* Assets.xcassets */,
 				FEB524151CF527EF003D7191 /* LaunchScreen.storyboard */,
 				FEB524181CF527EF003D7191 /* Info.plist */,
 			);
 			path = Location;
+			sourceTree = "<group>";
+		};
+		FEB5CB931CF52A37000D73CB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FEB5CB941CF52A4B000D73CB /* MapKit.framework */,
+				FEB5CB911CF52A01000D73CB /* CoreLocation.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -94,6 +116,11 @@
 				TargetAttributes = {
 					FEB524081CF527EF003D7191 = {
 						CreatedOnToolsVersion = 7.3;
+						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -152,6 +179,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				FEB5240D1CF527EF003D7191 /* AppDelegate.swift in Sources */,
+				FEB5CB991CF52A9D000D73CB /* MapViewController.swift in Sources */,
+				FEB5CB9C1CF53018000D73CB /* LocationManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

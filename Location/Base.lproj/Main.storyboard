@@ -5,10 +5,10 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Map View Controller-->
+        <!--Map-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="MapViewController" customModule="Location" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="BYZ-38-t0r" customClass="MapViewController" customModule="Location" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -18,9 +18,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="8mr-u3-6UJ">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="556"/>
+                                <gestureRecognizers/>
                                 <connections>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="y1f-e4-r6d"/>
+                                    <outletCollection property="gestureRecognizers" destination="KMj-Ns-RbS" appends="YES" id="oxQ-tp-6t5"/>
                                 </connections>
                             </mapView>
                         </subviews>
@@ -32,14 +34,73 @@
                             <constraint firstItem="8mr-u3-6UJ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="bWu-YU-Gs4"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="P0r-vo-jv3"/>
+                    <toolbarItems>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="JwK-am-kcQ"/>
+                        <barButtonItem systemItem="trash" id="iNO-QP-oh6">
+                            <connections>
+                                <action selector="trashButtonClicked:" destination="BYZ-38-t0r" id="A7G-xb-uHq"/>
+                            </connections>
+                        </barButtonItem>
+                    </toolbarItems>
+                    <navigationItem key="navigationItem" title="Map" id="P0r-vo-jv3"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="mapView" destination="8mr-u3-6UJ" id="4lI-sy-ZTp"/>
+                        <segue destination="dNh-Uo-foA" kind="show" identifier="ShowDetail" id="ZrX-gY-xO6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="KMj-Ns-RbS">
+                    <connections>
+                        <action selector="mapViewLongPressed:" destination="BYZ-38-t0r" id="8Ri-X7-Ceh"/>
+                    </connections>
+                </pongPressGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1137" y="399"/>
+        </scene>
+        <!--Selected Point-->
+        <scene sceneID="pYE-by-q6v">
+            <objects>
+                <viewController id="dNh-Uo-foA" customClass="LocationDetailViewController" customModule="Location" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Ybo-qf-dU2"/>
+                        <viewControllerLayoutGuide type="bottom" id="gPc-zS-SgW"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="pJ7-aM-NTO">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.75" translatesAutoresizingMaskIntoConstraints="NO" id="nlc-3O-e9D">
+                                <rect key="frame" x="20" y="72" width="560" height="120"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="120" id="0Uj-Gb-a7z"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="bFG-k9-NKf">
+                                <rect key="frame" x="290" y="290" width="20" height="20"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="nlc-3O-e9D" firstAttribute="trailing" secondItem="pJ7-aM-NTO" secondAttribute="trailingMargin" id="Byt-ag-PYs"/>
+                            <constraint firstItem="nlc-3O-e9D" firstAttribute="leading" secondItem="pJ7-aM-NTO" secondAttribute="leadingMargin" id="JKX-gG-45X"/>
+                            <constraint firstItem="bFG-k9-NKf" firstAttribute="centerY" secondItem="pJ7-aM-NTO" secondAttribute="centerY" id="KGy-cl-36J"/>
+                            <constraint firstItem="bFG-k9-NKf" firstAttribute="centerX" secondItem="pJ7-aM-NTO" secondAttribute="centerX" id="Q42-Ko-blh"/>
+                            <constraint firstItem="nlc-3O-e9D" firstAttribute="top" secondItem="Ybo-qf-dU2" secondAttribute="bottom" constant="8" id="eaP-3N-8M7"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Selected Point" id="BQa-hI-ei8"/>
+                    <connections>
+                        <outlet property="addressLabel" destination="nlc-3O-e9D" id="gYQ-ev-x4R"/>
+                        <outlet property="geocoderLoadingIndicator" destination="bFG-k9-NKf" id="N1b-Xb-keY"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DnN-6m-nDa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1923" y="399"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="TJH-Ie-mIB">

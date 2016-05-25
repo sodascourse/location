@@ -47,15 +47,19 @@ class MapViewController: UIViewController {
         self.mapView.showsCompass = true
         self.mapView.showsScale = true
 
-        self.toolbarItems = [MKUserTrackingBarButtonItem(mapView: self.mapView)]
+        let currentToolbarItems: [UIBarButtonItem] = self.toolbarItems ?? []
+        self.toolbarItems = [MKUserTrackingBarButtonItem(mapView: self.mapView)] + currentToolbarItems
+    }
+
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+
+        // Show the toolbar of the navigation controller
+        self.navigationController?.setToolbarHidden(false, animated: true)
     }
 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-
-        // Show the toolbar of the navigation controller
-        self.navigationController?.setToolbarHidden(false, animated: true)
-        self.navigationController?.hidesBarsOnTap = true
 
         // Ask user to grant permission first.
         LocationManager.sharedInstance.requestUserAuthorization { granted in
@@ -78,10 +82,87 @@ class MapViewController: UIViewController {
 
         // Hide the toolbar of the navigation controller
         self.navigationController?.setToolbarHidden(true, animated: true)
-        self.navigationController?.hidesBarsOnTap = false
+    }
+
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "ShowDetail" {
+            guard let detailViewController = segue.destinationViewController as? LocationDetailViewController else {
+                return
+            }
+            guard let annotationView = sender as? MKAnnotationView else { return }
+
+            detailViewController.annotation = annotationView.annotation
+        }
     }
 }
 
+// MARK: - Map View Delegate
 // Extenstion is good for grouping different section of your class.
 extension MapViewController: MKMapViewDelegate {
+
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+        // Check annotation type
+        if annotation is MKUserLocation {
+            // This annotation is "user's current location". Return `nil` to use default annotation view from the OS.
+            return nil
+        }
+
+        // Normal annotation
+        let annotationViewIdentifier = "Annotation View"
+        var annotationPinView: MKPinAnnotationView!
+        // Dequeue a reused view
+        if let reusedView = mapView.dequeueReusableAnnotationViewWithIdentifier(annotationViewIdentifier) {
+            if let reusedPinView = reusedView as? MKPinAnnotationView {
+                annotationPinView = reusedPinView
+            }
+        }
+        // Create one if cannot find a reused one
+        if annotationPinView == nil {
+            annotationPinView = MKPinAnnotationView(annotation: nil, reuseIdentifier: annotationViewIdentifier)
+            annotationPinView.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure)
+        }
+
+        // Setup the annotation view
+        annotationPinView.annotation = annotation
+        annotationPinView.canShowCallout = true
+        annotationPinView.animatesDrop = true
+        annotationPinView.draggable = true
+
+        return annotationPinView
+    }
+
+    func mapView(mapView: MKMapView, annotationView view: MKAnnotationView,
+                 calloutAccessoryControlTapped control: UIControl) {
+        self.performSegueWithIdentifier("ShowDetail", sender: view)
+    }
+}
+
+// MARK: - IBActions
+extension MapViewController {
+
+    @IBAction func mapViewLongPressed(sender: UILongPressGestureRecognizer) {
+        // We only want to process the event when the gesture is ended
+        //
+        // UILongPressGestureRecognizer is a "continuous" gesture recognizer. Unlike UITapGestureRecognizer, which
+        // is a "discrete" gesture recognizer, a continuous gesture recognizer keeps sending events.
+        //
+        if sender.state != .Ended {
+            return
+        }
+
+        // Convert CGPoint to CLLocationCoordninate2D
+        let pointInMapView = sender.locationInView(self.mapView)
+        let selectedCoordinate = self.mapView.convertPoint(pointInMapView, toCoordinateFromView: self.mapView)
+
+        // Create an annotation
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = selectedCoordinate
+        annotation.title = "Selected location"
+        self.mapView.addAnnotation(annotation)
+    }
+
+    @IBAction func trashButtonClicked(sender: AnyObject) {
+        self.mapView.removeAnnotations(self.mapView.annotations)
+    }
+
 }

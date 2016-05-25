@@ -15,6 +15,7 @@
 		FEB5CB971CF52A7A000D73CB /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FEB5CB911CF52A01000D73CB /* CoreLocation.framework */; };
 		FEB5CB991CF52A9D000D73CB /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEB5CB981CF52A9D000D73CB /* MapViewController.swift */; };
 		FEB5CB9C1CF53018000D73CB /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEB5CB9B1CF53018000D73CB /* LocationManager.swift */; };
+		FEB5CB9E1CF5EFD6000D73CB /* LocationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEB5CB9D1CF5EFD6000D73CB /* LocationDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		FEB5CB941CF52A4B000D73CB /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		FEB5CB981CF52A9D000D73CB /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		FEB5CB9B1CF53018000D73CB /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		FEB5CB9D1CF5EFD6000D73CB /* LocationDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +67,7 @@
 			children = (
 				FEB5240C1CF527EF003D7191 /* AppDelegate.swift */,
 				FEB5CB981CF52A9D000D73CB /* MapViewController.swift */,
+				FEB5CB9D1CF5EFD6000D73CB /* LocationDetailViewController.swift */,
 				FEB5CB9B1CF53018000D73CB /* LocationManager.swift */,
 				FEB524101CF527EF003D7191 /* Main.storyboard */,
 				FEB524131CF527EF003D7191 /* Assets.xcassets */,
@@ -178,6 +181,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FEB5CB9E1CF5EFD6000D73CB /* LocationDetailViewController.swift in Sources */,
 				FEB5240D1CF527EF003D7191 /* AppDelegate.swift in Sources */,
 				FEB5CB991CF52A9D000D73CB /* MapViewController.swift in Sources */,
 				FEB5CB9C1CF53018000D73CB /* LocationManager.swift in Sources */,
